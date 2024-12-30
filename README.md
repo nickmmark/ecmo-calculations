@@ -5,7 +5,7 @@ Extracorporeal membrane oxygenation (ECMO) calculations
 Blood flow throw an ECMO circuit is typically limited by the cannula. Flow and pressure is determined by the Hagen-Pousille equation, whereby flow/pressure drop is proportional to fourth power of inner canulla diameter and inversely proportional to cannula length:
 
 ```math
-\Delta P = \frac{8 \mu \cdot L \cdot Q}{\pi {R}^{4}}
+\Delta P = \frac{8 \mu \cdot L \cdot Q}{\pi \cdot {R}^{4}}
 ```
 
 While Hagen-Pousille provides a good first approximation of flow, there are several important limitations:
