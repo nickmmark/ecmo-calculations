@@ -19,6 +19,12 @@ This is a simple web app that combines all the data together, making it easier t
 I used the published flow/pressure curves for each cannula, abstracting the data using [WebPlotDigitizer 4.0](https://apps.automeris.io/wpd4/) and plotted a polynomial curve to fit the datapoints. This equation was used to plot the curves.
 
 
+#### Catheter data sources
+Medtronic --> [Crescent Dual Lumen Jugular Catheter](https://europe.medtronic.com/xd-en/healthcare-professionals/products/cardiovascular/extracorporeal-life-support/crescent-jugular-dual-lumen-catheter.html)
+Spectrum Medical --> [Quantum Dual Lumen Jugular Catheter](https://www.spectrummedical.com/en-us/quantum-perfusion-technologies/quantum-sterile-technologies-us/cannulas-us/dual-lumen-rv-to-pa-cannula)
+
+
+
 ## Recircualtion
 
 
