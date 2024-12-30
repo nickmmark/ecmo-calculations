@@ -1,7 +1,7 @@
 # ecmo-calculations
 Extracorporeal membrane oxygenation (ECMO) calculations
 
-## Calculating pressure drop across ECMO cannulas
+## Flow/pressure drop across ECMO cannulas
 Blood flow throw an ECMO circuit is typically limited by the cannula. Flow and pressure is determined by the Hagen-Pousille equation, whereby flow/pressure drop is proportional to fourth power of inner canulla diameter and inversely proportional to cannula length:
 
 ```math
@@ -15,6 +15,9 @@ While Hagen-Pousille provides a good first approximation of flow, there are seve
 Thus it is more accurate to empirically measure the performance of each cannula. Each manufacturer provides the measured flow/pressure curves for each cannula. As a clinician it is necessary to consult the different cannula pressure/flow curves to determine the expected pressure drop and flow acheivable with a given ECMO configuration. Unfortunately this requires consulting many different PDFs to find the necessary information.
 
 This is a simple web app that combines all the data together, making it easier to compare cannula and determine expected flows/pressure drops.
+
+I used the published flow/pressure curves for each cannula, abstracting the data using [WebPlotDigitizer 4.0](https://apps.automeris.io/wpd4/) and plotted a polynomial curve to fit the datapoints. This equation was used to plot the curves.
+
 
 ## Recircualtion
 
