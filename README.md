@@ -31,11 +31,13 @@ I used the published flow/pressure curves for each cannula, abstracting the data
 
 #### Things to do
 [] add more cannula!
-[] schematics of the cannula showing details such as stages, number of inlets, and cross section
+
+[] add schematics for each cannula showing details such as stages, number of inlets, and cross section
+
 [] add more organization of cannula types (IJ dual lumen, IJ single lumen, femoral single lumen, etc)
 
 
-## Recircualtion
+## Re-circualtion
 **Recirculation** is a common issue with venovenous ECMO that occurs when oxygenated blood is withdrawn by the drainage cannula, instead of entering the patient's systemic circulation.
 
 Recirculation (%) is defined as:
@@ -68,6 +70,17 @@ where:
 * SxO2 - the oxygen saturation (%) of the blood
 * PxO2 - partial pressure of oxygen in the blood
 
+## DO2 and VO2
+
+## ECMO prognostic scores
+Several scores exist to (try to) predict prognosis in patients undergoing ECMO or to identify good candidates. These systems include
+* RESP (Respiratory ECMO Survival Prediction) Score
+* SAVE (Survival after Veno-Arterial ECMO) Score
+* PRESET (PREdiction of Survival on ECMO Therapy) Score
+* Murray Score
+* Oxygenation Index
+* & more
+  
 
 ## License/disclaimer
 This code is provided "as is", without warranty of any kind. Don't be stupid. Double check any calculations. Consult a medical professional if necessary. See the attached license for more information about the MIT License.
