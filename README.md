@@ -2,7 +2,7 @@
 Extracorporeal membrane oxygenation (ECMO) calculations
 
 ## Flow/pressure drop across ECMO cannulas
-Blood flow throw an ECMO circuit is typically limited by the cannula. Flow and pressure is determined by the Hagen-Pousille equation, whereby flow/pressure drop is proportional to fourth power of inner canulla diameter and inversely proportional to cannula length:
+Blood flow throw an ECMO circuit is typically limited by the cannula. Flow and pressure is determined by the [Hagen-Pousille equation](https://en.wikipedia.org/wiki/Hagen%E2%80%93Poiseuille_equation), whereby flow/pressure drop is proportional to fourth power of inner canulla diameter and inversely proportional to cannula length:
 
 ```math
 \Delta P = \frac{8 \mu \cdot L \cdot Q}{\pi \cdot {R}^{4}}
@@ -12,9 +12,9 @@ While Hagen-Pousille provides a good first approximation of flow, there are seve
 * Blood is a non-Newtonian fluid - viscosity changes with shear
 * Cannula geometry is complex - mutiple stages with multiple holes complicates flow
 
-Thus it is more accurate to empirically measure the performance of each cannula. Each manufacturer provides the measured flow/pressure curves for each cannula. As a clinician it is necessary to consult the different cannula pressure/flow curves to determine the expected pressure drop and flow acheivable with a given ECMO configuration. Unfortunately this requires consulting many different PDFs to find the necessary information.
+Thus it is more accurate to empirically measure the performance of each cannula. Each manufacturer provides the measured flow/pressure curves for each cannula. As a clinician it is necessary to consult the different cannula pressure/flow curves to determine the expected pressure drop and flow acheivable with a given ECMO configuration. Unfortunately this requires finding & consulting many different PDFs to find the necessary information.
 
-This is a simple web app that combines all the data together, making it easier to compare cannula and determine expected flows/pressure drops.
+I made a simple web app that combines all the data together, making it easier to compare different cannula and determine the expected flows/pressure drops.
 
 I used the published flow/pressure curves for each cannula, abstracting the data using [WebPlotDigitizer 4.0](https://apps.automeris.io/wpd4/) and plotted a polynomial curve to fit the datapoints. The polynomial curve fit with $R^{2}$ > 0.99 in all cases.
 
