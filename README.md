@@ -16,7 +16,7 @@ Thus it is more accurate to empirically measure the performance of each cannula.
 
 This is a simple web app that combines all the data together, making it easier to compare cannula and determine expected flows/pressure drops.
 
-I used the published flow/pressure curves for each cannula, abstracting the data using [WebPlotDigitizer 4.0](https://apps.automeris.io/wpd4/) and plotted a polynomial curve to fit the datapoints. The polynomial curve fit with R^{2} > 0.99 in all cases.
+I used the published flow/pressure curves for each cannula, abstracting the data using [WebPlotDigitizer 4.0](https://apps.automeris.io/wpd4/) and plotted a polynomial curve to fit the datapoints. The polynomial curve fit with $\R^{2} $ > 0.99 in all cases.
 
 ![Data abstraction process](https://github.com/nickmmark/ecmo-calculations/blob/main/ECMO_cannula_flow.png)
 
@@ -24,7 +24,7 @@ I used the published flow/pressure curves for each cannula, abstracting the data
 #### Catheter data sources
 * Medtronic --> [Crescent Dual Lumen Jugular Catheter](https://europe.medtronic.com/xd-en/healthcare-professionals/products/cardiovascular/extracorporeal-life-support/crescent-jugular-dual-lumen-catheter.html)
 * Spectrum Medical --> [Quantum Dual Lumen Jugular Catheter](https://www.spectrummedical.com/en-us/quantum-perfusion-technologies/quantum-sterile-technologies-us/cannulas-us/dual-lumen-rv-to-pa-cannula)
-* Getinge --> [Avalon Elite Bi-Caval Dual Lumen Catheter]()
+* Getinge --> [Avalon Elite Bi-Caval Dual Lumen Catheter](https://www.getinge.com/int/products/avalon-elite-catheter/?tab=2)
 
 
 
