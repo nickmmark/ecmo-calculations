@@ -1,5 +1,5 @@
 # ecmo-calculations
-Extracorporeal membrane oxygenation (ECMO) calculations
+A set of web-based apps for Extracorporeal membrane oxygenation (ECMO) calculations
 
 ## Flow/pressure drop across ECMO cannulas
 Blood flow throw an ECMO circuit is typically limited by the cannula. Flow and pressure is determined by the [Hagen-Pousille equation](https://en.wikipedia.org/wiki/Hagen%E2%80%93Poiseuille_equation), whereby flow/pressure drop is proportional to fourth power of inner canulla diameter and inversely proportional to cannula length:
@@ -8,14 +8,14 @@ Blood flow throw an ECMO circuit is typically limited by the cannula. Flow and p
 \Delta P = \frac{8 \mu \cdot L \cdot Q}{\pi \cdot {R}^{4}}
 ```
 
-While Hagen-Pousille provides a good first approximation of flow, there are several important limitations:
+While Hagen-Pousille provides a good _first approximation_ of flow, there are several limitations:
 * In laminar flow modes (low Reynolds number), the **pressure flow relationship should be linear**: P ∝ Q for rigid, smooth tubes
 * As flow increases, turbulence develops (high Reynolds numbers), the **pressure flow relationship becomes non-linear**: P ∝ $Q^{2} $
 * Blood is a **non-Newtonian fluid** - viscosity changes with shear
 * Cannula geometry is complex - mutiple stages with multiple holes complicates flow dynamics
 * At very high flow rates, additional phenomena like compressibility and cavitation may contribute
 
-Thus it is more accurate to empirically measure the performance of each cannula. Each manufacturer provides the measured flow/pressure curves for each cannula. As a clinician it is necessary to consult the different cannula pressure/flow curves to determine the expected pressure drop and flow acheivable with a given ECMO configuration. Unfortunately this requires finding & consulting many different PDFs to find the necessary information.
+Thus instead of using Hagen-Pousille, it is more accurate to ***empirically measure the performance of each cannula***. Each manufacturer provides the measured flow/pressure curves for each cannula. As a clinician it is necessary to consult the different cannula pressure/flow curves to determine the expected pressure drop and flow acheivable with a given ECMO configuration. Unfortunately this requires finding & consulting many different PDFs to find the necessary information, especially if comparing multiple possible cannula configurations.
 
 I made a simple web app that combines all the data together, making it easier to compare different cannula and determine the expected flows/pressure drops.
 
@@ -40,7 +40,9 @@ I used the published flow/pressure curves for each cannula, abstracting the data
 
 
 ## Recircualtion
-Recirculation is defined as:
+**Recirculation** is a common issue with venovenous ECMO that occurs when oxygenated blood is withdrawn by the drainage cannula, instead of entering the patient's systemic circulation.
+
+Recirculation (%) is defined as:
 ```math
 Recirculation = \frac{{S}_{pre}O2 - {S}_{v}O2}{{S}_{post}O2 - {S}_{v}O2}
 ```
@@ -52,7 +54,7 @@ where:
 
 
 ## Membrane lung efficiency
-
+**Membrane Lung Efficiency** is a quantitative measure of how well the ECMO membrane lung transfers oxygen (and carbon dioxide) between blood and gas. Changes in membrane lung efficiency can indicate potential issues such as thrombosis or circuit malfunction.
 ```math
 VO2ML = BF \cdot ({C}_{post}O2 - {C}_{post}O2) \cdot 10
 ```
