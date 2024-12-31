@@ -39,12 +39,35 @@ I used the published flow/pressure curves for each cannula, abstracting the data
 
 
 ## Recircualtion
-
+Recirculation is defined as:
 ```math
 Recirculation = \frac{{S}_{pre}O2 - {S}_{v}O2}{{S}_{post}O2 - {S}_{v}O2}
 ```
+where:
+* Recirculation - the % of blood that is recirculating
+* SpreO2 - saturation of blood entering the oxygenator
+* SpreO2 - saturation of blood leaving the oxygenator
+* SvO2 - saturation of blood in the pulmonary artery
+
 
 ## Membrane lung efficiency
+
+```math
+VO2ML = BF \cdot ({C}_{post}O2 - {C}_{post}O2) \cdot 10
+```
+where:
+* VO2ML - the oxygen transfer for the membrane lung (mL/min)
+* BF - blood flow through the membrane lung (L/min)
+* CpreO2 - oxygen content in blood entering the membrane lung (mL/dL)
+* CpostO2 - oxygen content in blood leaving the membrane lung (mL/dL)
+
+We can substitute in formula for oxygen content for both CpreO2 and CpostO2:
+CaO2 = (Hb x 1.34 ml O2/g Hb x SaO2) + (PaO2 x 0.003 ml O2/mmHg/dL)
+
+where:
+* Hb - hemoglobin concentration (g/dL)
+* SxO2 - the oxygen saturation (%) of the blood
+* PxO2 - partial pressure of oxygen in the blood
 
 
 ## License/disclaimer
