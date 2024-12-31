@@ -30,6 +30,8 @@ I used the published flow/pressure curves for each cannula, abstracting the data
 
 
 #### Things to do
+[] add a "maximum predicted flow" for each cannula given the maximum pressure drop
+
 [] add more cannula!
 
 [] add schematics for each cannula showing details such as stages, number of inlets, and cross section
