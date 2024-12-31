@@ -9,14 +9,16 @@ Blood flow throw an ECMO circuit is typically limited by the cannula. Flow and p
 ```
 
 While Hagen-Pousille provides a good first approximation of flow, there are several important limitations:
+* In laminar flow modes (low Reynolds number), the relationship should be linear: P ∝ Q for rigid, smooth tubes
+* As flow increases, turbulence develops (high Reynolds numbers), and he relationship becomes non-linear: P ∝ $Q^{2} $
 * Blood is a non-Newtonian fluid - viscosity changes with shear
-* Cannula geometry is complex - mutiple stages with multiple holes complicates flow
+* Cannula geometry is complex - mutiple stages with multiple holes complicates flow dynamics
 
 Thus it is more accurate to empirically measure the performance of each cannula. Each manufacturer provides the measured flow/pressure curves for each cannula. As a clinician it is necessary to consult the different cannula pressure/flow curves to determine the expected pressure drop and flow acheivable with a given ECMO configuration. Unfortunately this requires finding & consulting many different PDFs to find the necessary information.
 
 I made a simple web app that combines all the data together, making it easier to compare different cannula and determine the expected flows/pressure drops.
 
-I used the published flow/pressure curves for each cannula, abstracting the data using [WebPlotDigitizer 4.0](https://apps.automeris.io/wpd4/) and plotted a polynomial curve to fit the datapoints. The polynomial curve fit with $R^{2}$ > 0.99 in all cases.
+I used the published flow/pressure curves for each cannula, abstracting the data using [WebPlotDigitizer 4.0](https://apps.automeris.io/wpd4/) and plotted a polynomial curve to fit the datapoints. Theoretically, a polynomial can capture both linear and higher-order terms, accommodating the transition from laminar to turbulent flow as well as other complicating factors. Empircally, the polynomial curves that I generated fit with $R^{2}$ > 0.99 in all cases.
 
 ![Data abstraction process](https://github.com/nickmmark/ecmo-calculations/blob/main/ECMO_cannula_flow.png)
 
