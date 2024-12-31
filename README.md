@@ -33,6 +33,9 @@ I used the published flow/pressure curves for each cannula, abstracting the data
 * Spectrum Medical --> [Quantum Dual Lumen Jugular Catheter](https://www.spectrummedical.com/en-us/quantum-perfusion-technologies/quantum-sterile-technologies-us/cannulas-us/dual-lumen-rv-to-pa-cannula)
 * Getinge --> [Avalon Elite Bi-Caval Dual Lumen Catheter](https://www.getinge.com/int/products/avalon-elite-catheter/?tab=2)
 
+#### Things to do
+[ ] add more cannula!
+[ ] add more organization of cannula types (IJ dual lumen, IJ single lumen, femoral single lumen, etc)
 
 
 ## Recircualtion
