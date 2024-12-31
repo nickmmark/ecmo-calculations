@@ -28,15 +28,21 @@ I used the published flow/pressure curves for each cannula, abstracting the data
 ![Data abstraction process](https://github.com/nickmmark/ecmo-calculations/blob/main/ECMO_cannula_flow.png)
 
 
+#### Versions
+1.0 managed to graph the curves
+2.0 graphs the curves with a max pressure drop and flow calcualtion
+
 
 #### Things to do
-[] add a "maximum predicted flow" for each cannula given the maximum pressure drop
+[x] add a "maximum predicted flow" for each cannula given the maximum pressure drop
 
-[] add more cannula!
+[] add more cannula! (this probably means having a seperate database that the visualization app accesses... ugh complex)
 
 [] add schematics for each cannula showing details such as stages, number of inlets, and cross section
 
 [] add more organization of cannula types (IJ dual lumen, IJ single lumen, femoral single lumen, etc)
+
+[] allow the user to specify combinations of different cannula (e.g. VAV, VAPa, etc); this will require adding flow together cannula in parallel. Some interesting math and physics to think about. Kirchoff's laws?
 
 
 ## Re-circualtion
