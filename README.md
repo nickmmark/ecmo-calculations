@@ -34,8 +34,9 @@ I used the published flow/pressure curves for each cannula, abstracting the data
 * Getinge --> [Avalon Elite Bi-Caval Dual Lumen Catheter](https://www.getinge.com/int/products/avalon-elite-catheter/?tab=2)
 
 #### Things to do
-[ ] add more cannula!
-[ ] add more organization of cannula types (IJ dual lumen, IJ single lumen, femoral single lumen, etc)
+[] add more cannula!
+[] schematics of the cannula showing details such as stages, number of inlets, and cross section
+[] add more organization of cannula types (IJ dual lumen, IJ single lumen, femoral single lumen, etc)
 
 
 ## Recircualtion
