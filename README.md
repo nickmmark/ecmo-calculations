@@ -13,6 +13,7 @@ While Hagen-Pousille provides a good first approximation of flow, there are seve
 * As flow increases, turbulence develops (high Reynolds numbers), and he relationship becomes non-linear: P ∝ $Q^{2} $
 * Blood is a non-Newtonian fluid - viscosity changes with shear
 * Cannula geometry is complex - mutiple stages with multiple holes complicates flow dynamics
+* At very high flow rates, additional phenomena like compressibility and cavitation may contribute significantly
 
 Thus it is more accurate to empirically measure the performance of each cannula. Each manufacturer provides the measured flow/pressure curves for each cannula. As a clinician it is necessary to consult the different cannula pressure/flow curves to determine the expected pressure drop and flow acheivable with a given ECMO configuration. Unfortunately this requires finding & consulting many different PDFs to find the necessary information.
 
