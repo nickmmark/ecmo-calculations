@@ -9,11 +9,11 @@ Blood flow throw an ECMO circuit is typically limited by the cannula. Flow and p
 ```
 
 While Hagen-Pousille provides a good first approximation of flow, there are several important limitations:
-* In laminar flow modes (low Reynolds number), the relationship should be linear: P ∝ Q for rigid, smooth tubes
-* As flow increases, turbulence develops (high Reynolds numbers), and he relationship becomes non-linear: P ∝ $Q^{2} $
-* Blood is a non-Newtonian fluid - viscosity changes with shear
+* In laminar flow modes (low Reynolds number), the **pressure flow relationship should be linear**: P ∝ Q for rigid, smooth tubes
+* As flow increases, turbulence develops (high Reynolds numbers), the **pressure flow relationship becomes non-linear**: P ∝ $Q^{2} $
+* Blood is a **non-Newtonian fluid** - viscosity changes with shear
 * Cannula geometry is complex - mutiple stages with multiple holes complicates flow dynamics
-* At very high flow rates, additional phenomena like compressibility and cavitation may contribute significantly
+* At very high flow rates, additional phenomena like compressibility and cavitation may contribute
 
 Thus it is more accurate to empirically measure the performance of each cannula. Each manufacturer provides the measured flow/pressure curves for each cannula. As a clinician it is necessary to consult the different cannula pressure/flow curves to determine the expected pressure drop and flow acheivable with a given ECMO configuration. Unfortunately this requires finding & consulting many different PDFs to find the necessary information.
 
