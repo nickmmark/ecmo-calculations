@@ -41,7 +41,7 @@ I used the published flow/pressure curves for each cannula, abstracting the data
 ## Recircualtion
 
 ```math
-Recirculation (%) = \frac{{S}_{pre}O2 - {S}_{v}O2{{S}_{post}O2 - {S}_{v}O2}
+Recirculation = \frac{{S}_{pre}O2 - {S}_{v}O2}{{S}_{post}O2 - {S}_{v}O2}
 ```
 
 ## Membrane lung efficiency
