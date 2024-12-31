@@ -73,6 +73,8 @@ where:
 ## DO2 and VO2
 
 ## Lung Mechanics:Driving Pressure, Mechanical Power
+![](https://github.com/nickmmark/pulmonary-calculations/blob/main/mechanical_power_demo2.gif)
+
 [see my other git for more](https://github.com/nickmmark/pulmonary-calculations)
 
 ## ECMO prognostic scores
