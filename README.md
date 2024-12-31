@@ -19,6 +19,10 @@ Thus it is more accurate to empirically measure the performance of each cannula.
 
 I made a simple web app that combines all the data together, making it easier to compare different cannula and determine the expected flows/pressure drops.
 
+![](https://github.com/nickmmark/ecmo-calculations/blob/main/ECMO_cannula_calculator_v1_demo.gif)
+
+
+#### Process
 I used the published flow/pressure curves for each cannula, abstracting the data using [WebPlotDigitizer 4.0](https://apps.automeris.io/wpd4/) and plotted a polynomial curve to fit the datapoints. Theoretically, a polynomial can capture both linear and higher-order terms, accommodating the transition from laminar to turbulent flow as well as other complicating factors. Empircally, the polynomial curves that I generated fit with $R^{2}$ > 0.99 in all cases.
 
 ![Data abstraction process](https://github.com/nickmmark/ecmo-calculations/blob/main/ECMO_cannula_flow.png)
