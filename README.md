@@ -72,9 +72,12 @@ where:
 
 ## DO2 and VO2
 
+## Lung Mechanics:Driving Pressure, Mechanical Power
+[see my other git for more](https://github.com/nickmmark/pulmonary-calculations)
+
 ## ECMO prognostic scores
 Several scores exist to (try to) predict prognosis in patients undergoing ECMO or to identify good candidates. These systems include
-* RESP (Respiratory ECMO Survival Prediction) Score
+* RESP (Respiratory ECMO Survival Prediction) Score --> [see my other git for more](https://github.com/nickmmark/pulmonary-calculations)
 * SAVE (Survival after Veno-Arterial ECMO) Score
 * PRESET (PREdiction of Survival on ECMO Therapy) Score
 * Murray Score
