@@ -8,11 +8,11 @@ Blood flow throw an ECMO circuit is typically limited by the cannula. Flow and p
 \Delta P = \frac{8 \mu \cdot L \cdot Q}{\pi \cdot {R}^{4}}
 ```
 
-While Hagen-Pousille provides a good _first approximation_ of flow, there are several limitations:
-* In laminar flow modes (low Reynolds number), the **pressure flow relationship should be linear**: P ∝ Q for rigid, smooth tubes
-* As flow increases, turbulence develops (high Reynolds numbers), the **pressure flow relationship becomes non-linear**: P ∝ $Q^{2} $
-* Blood is a **non-Newtonian fluid** - viscosity changes with shear
-* Cannula geometry is complex - mutiple stages with multiple holes complicates flow dynamics
+While **Hagen-Pousille** provides a good _first approximation_ of flow, there are several limitations:
+* In _laminar_ flow modes (low Reynolds number), the **pressure flow relationship should be linear**: P ∝ Q for rigid, smooth tubes
+* As flow increases _turbulence_ develops (high Reynolds numbers), the **pressure flow relationship becomes non-linear**: P ∝ $Q^{2} $
+* **Blood is a [non-Newtonian fluid](https://en.wikipedia.org/wiki/Non-Newtonian_fluid#:~:text=In%20physics%20and%20chemistry%2C%20a,change%20when%20subjected%20to%20force.)** - viscosity changes with shear; specifically blood exhibits **shear thinning** whereby the apparent viscosity decreases with shear.
+* **Cannula geometry is complex** - mutiple stages with multiple holes complicates flow dynamics
 * At very high flow rates, additional phenomena like compressibility and cavitation may contribute
 
 Thus instead of using Hagen-Pousille, it is more accurate to ***empirically measure the performance of each cannula***. Each manufacturer provides the measured flow/pressure curves for each cannula. As a clinician it is necessary to consult the different cannula pressure/flow curves to determine the expected pressure drop and flow acheivable with a given ECMO configuration. Unfortunately this requires finding & consulting many different PDFs to find the necessary information, especially if comparing multiple possible cannula configurations.
