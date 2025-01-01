@@ -29,9 +29,9 @@ I used the published flow/pressure curves for each cannula, abstracting the data
 
 
 #### Versions
-1.0 managed to graph the curves
-2.0 improved graphs with groups
-3.0 improved graphs with max flow calculated for a given maximum pressure drop
+* 1.0 managed to graph the curves
+* 2.0 improved graphs with groups
+* 3.0 improved graphs with max flow calculated for a given maximum pressure drop
 
 
 #### Things to do
