@@ -17,7 +17,7 @@ While **Hagen-Pousille** provides a good _first approximation_ of flow, there ar
 
 Thus instead of using Hagen-Pousille, it is more accurate to ***empirically measure the performance of each cannula***. Each manufacturer provides the measured flow/pressure curves for each cannula. As a clinician it is necessary to consult the different cannula pressure/flow curves to determine the expected pressure drop and flow acheivable with a given ECMO configuration. Unfortunately this requires finding & consulting many different PDFs to find the necessary information, especially if comparing multiple possible cannula configurations.
 
-I made a simple web app that combines all the data together, making it easier to compare different cannula and determine the expected flows/pressure drops.
+I made a simple web app that combines all the data together, making it easier to compare different cannula and determine the expected flows/pressure drops:
 
 ![](https://github.com/nickmmark/ecmo-calculations/blob/main/ECMO_cannula_calculator_v1_demo.gif)
 
@@ -30,15 +30,16 @@ I used the published flow/pressure curves for each cannula, abstracting the data
 
 #### Versions
 1.0 managed to graph the curves
-2.0 graphs the curves with a max pressure drop and flow calcualtion
+2.0 improved graphs with groups
+3.0 improved graphs with max flow calculated for a given maximum pressure drop
 
 
 #### Things to do
 [x] add a "maximum predicted flow" for each cannula given the maximum pressure drop
 
-[] add more cannula! (this probably means having a seperate database that the visualization app accesses... ugh complex)
+[] add more cannula! (this probably means having a seperate database that the visualization app can access... ugh complex)
 
-[] add schematics for each cannula showing details such as stages, number of inlets, and cross section
+[] add schematics for each cannula showing details such as stages, number of inlets, and cross section (pretty drawings!)
 
 [] add more organization of cannula types (IJ dual lumen, IJ single lumen, femoral single lumen, etc)
 
