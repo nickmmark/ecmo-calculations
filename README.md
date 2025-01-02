@@ -30,9 +30,15 @@ I used the published flow/pressure curves for each cannula, abstracting the data
 ![Data abstraction process](https://github.com/nickmmark/ecmo-calculations/blob/main/ECMO_cannula_flow.png)
 
 #### Guide for adding more cannula to the app
-1. Abstract the curves using WebPlotDigitizer; align the axes & add at least 5 points for each line.
-2. Paste the data into excel & create a `second order polynomial` trendline. Set the intercept = 0.0 
-3. Add a new group of checkboxes; for example:
+1. Abstract the curves using [WebPlotDigitizer](https://apps.automeris.io/wpd4/); align the axes & add at least 5 points for each line.
+2. Paste the data into excel & create a `second order polynomial` trendline. Set the intercept = 0.0. Ensure the $R^{2}$ > 0.99 for quality. Copy the polynomial.
+| Cannula | Polynomial | R2 |
+|---|---|---|
+| ProTek Duo 29Fr inflow | y = 14.909x2 + 1.7309x | 0.9997 |
+| ProTek Duo 29Fr drainage | y = -2.4682x2 - 2.1438x | 0.9983 |
+| ProTek Duo 31Fr inflow | y = 6.9807x2 + 1.9931x | 0.9999 |
+| ProTek Duo 31Fr drainage | y = -1.8139x2 - 4.5159x | 0.9997 |  
+4. Add a new group of checkboxes for the new cannula. For example:
 ```html
   <div class="group protek-group">
       <label><input type="checkbox" id="ProTek"><b> ProTek Duo Cannula</b></label>
@@ -40,19 +46,23 @@ I used the published flow/pressure curves for each cannula, abstracting the data
       <label><input type="checkbox" id="ProTek31Fr"> 31 Fr <span class="flow-result" id="flow-ProTek31Fr"></span></label>
   </div>
 ```
-5. Update the equations and flow coefficients, for example
+5. Update the equations and flow coefficients using the equation. e.g.
 ```javascript
+  // equations
     "ProTek29FrDrain": (x) => -2.4682 * x ** 2 - 2.1438 * x;
     "ProTek31FrDrain": (x) => -1.8139 * x ** 2 - 4.5159 * x;
+  // coefficients
+    "ProTek29Fr": { a: 14.909, b: 1.7309 },
+     "ProTek31Fr": { a: 6.9807, b: 1.9931 }
 ```
-5. Update the dataset generation logic; for example:
+5. Update the dataset generation logic. e.g.
 ```javascript
 const label = key.includes('Quantum') ? `Quantum ${type} Cannula ${size}` :
               key.includes('Avalon') ? `Avalon ${type} Cannula ${size}` :
               key.includes('ProTek') ? `ProTek Duo ${type} Cannula ${size}` : // NEW cannula added
               `Crescent ${type} Cannula ${size}`;
 ```
-7. Add logic to the checkbox event handler
+7. Add logic to the checkbox event handler, so the cannula appear/disappear when boxes are checked. e.g.
 ``` javascript
 case "ProTek29Fr":
     chart.data.datasets.find(dataset => dataset.label === "ProTek Duo Inflow Cannula 29Fr").hidden = !checkbox.checked;
@@ -65,10 +75,10 @@ case "ProTek31Fr":
 ```
 
 #### Versions
-* 1.0 managed to graph the curves
-* 2.0 improved graphs with groups
+* 1.0 (barely) managed to graph the curves
+* 2.0 improved graphing, added groups of cannula
 * 3.0 improved graphs with max flow calculated for a given maximum pressure drop
-* 4.0 added additional cannula, improved UX, added hyperlinks to manufacturer reference sheet for transparency
+* 4.0 added additional cannula, improved UX, added hyperlinks to the manufacturer nomogram for transparency
 
 
 #### Things to do
@@ -76,14 +86,15 @@ case "ProTek31Fr":
 
 [] add more cannula! (this probably means having a seperate database that the visualization app can access... ugh complex)
 
-[] add schematics for each cannula showing details such as stages, number of inlets, and cross section (pretty drawings!)
+[] add schematics for each cannula showing details such as stages, number of inlets, and cross section (a.k.a. pretty drawings!)
 
 [] add more organization of cannula types (IJ dual lumen, IJ single lumen, femoral single lumen, etc)
 
 [] allow the user to specify combinations of different cannula (e.g. VAV, VAPa, etc); this will require adding flow together cannula in parallel. Some interesting math and physics to think about. Kirchoff's laws?
 
 
-## Re-circualtion
+
+## Re-circualtion Calculator
 **Recirculation** is a common issue with venovenous ECMO that occurs when oxygenated blood is withdrawn by the drainage cannula, instead of entering the patient's systemic circulation.
 
 Recirculation (%) is defined as:
