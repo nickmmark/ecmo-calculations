@@ -113,6 +113,17 @@ where:
 * SpreO2 - saturation of blood leaving the oxygenator
 * SvO2 - saturation of blood in the pulmonary artery
 
+#### Interpretation
+Recirculation >20% is generally considered clincally significant.
+Recirculation can be caused by several factors:
+* **Cannula migration** (e.g. obstruction of flow into the drainage cannula leading to more from infusion cannula)
+* **Excessive flow** (e.g. drainage cannula is pulling in blood from infusion cannula)
+* **Abnormal pressure differentials** (e.g. elevated intra-cardiac, intrathoracic, or intra-abdominal pressures)
+Additionally, the absolute saturations can convey additional information; A SpreO2 <75% suggests that significant recirculation is unlikely.
+
+#### Implementation
+
+
 
 ## Membrane lung efficiency
 **Membrane Lung Efficiency** is a quantitative measure of how well the ECMO membrane lung transfers oxygen (and carbon dioxide) between blood and gas. Changes in membrane lung efficiency can indicate potential issues such as thrombosis or circuit malfunction.
