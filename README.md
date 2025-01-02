@@ -24,10 +24,13 @@ I made a simple web app that combines all the data together, making it easier to
 The "maximum pressure drop" across a venous cannula in ECMO refers to the greatest difference in pressure between the blood entering the cannula from the patient's vein and the blood exiting the cannula into the ECMO circuit. Typically a value of 100 or 150 mmHg is considered the maximum pressure drop. The app allows the user to specify the maximum permissible pressure drop and it both calculates it for each cannula and displays it visually on the graph.
 
 
-#### Process
+#### Data Abstraction Process
 I used the published flow/pressure curves for each cannula, abstracting the data using [WebPlotDigitizer 4.0](https://apps.automeris.io/wpd4/) and plotted a polynomial curve to fit the datapoints. Theoretically, a polynomial can capture both linear and higher-order terms, accommodating the transition from laminar to turbulent flow as well as other complicating factors. Empircally, the polynomial curves that I generated fit with $R^{2}$ > 0.99 in all cases.
 
 ![Data abstraction process](https://github.com/nickmmark/ecmo-calculations/blob/main/ECMO_cannula_flow.png)
+
+All the flow curves were obtained from the manufacturer. See below for references.
+
 
 #### Guide for adding more cannula to the app
 1. Abstract the curves using [WebPlotDigitizer](https://apps.automeris.io/wpd4/); align the axes & add at least 5 points for each line.
@@ -40,7 +43,7 @@ I used the published flow/pressure curves for each cannula, abstracting the data
 | ProTek Duo 31Fr inflow | y = 6.9807x2 + 1.9931x | 0.9999 |
 | ProTek Duo 31Fr drainage | y = -1.8139x2 - 4.5159x | 0.9997 |  
 
-4. Add a new group of checkboxes for the new cannula. For example:
+3. Add a new group of checkboxes for the new cannula. For example:
 ```html
   <div class="group protek-group">
       <label><input type="checkbox" id="ProTek"><b> ProTek Duo Cannula</b></label>
@@ -48,7 +51,7 @@ I used the published flow/pressure curves for each cannula, abstracting the data
       <label><input type="checkbox" id="ProTek31Fr"> 31 Fr <span class="flow-result" id="flow-ProTek31Fr"></span></label>
   </div>
 ```
-5. Update the equations and flow coefficients using the equation. e.g.
+4. Update the equations and flow coefficients using the equation. e.g.
 ```javascript
   // equations
     "ProTek29FrDrain": (x) => -2.4682 * x ** 2 - 2.1438 * x;
@@ -64,7 +67,7 @@ const label = key.includes('Quantum') ? `Quantum ${type} Cannula ${size}` :
               key.includes('ProTek') ? `ProTek Duo ${type} Cannula ${size}` : // NEW cannula added
               `Crescent ${type} Cannula ${size}`;
 ```
-7. Add logic to the checkbox event handler, so the cannula appear/disappear when boxes are checked. e.g.
+6. Add logic to the checkbox event handler, so the cannula appear/disappear when boxes are checked. e.g.
 ``` javascript
 case "ProTek29Fr":
     chart.data.datasets.find(dataset => dataset.label === "ProTek Duo Inflow Cannula 29Fr").hidden = !checkbox.checked;
@@ -75,6 +78,7 @@ case "ProTek31Fr":
     chart.data.datasets.find(dataset => dataset.label === "ProTek Duo Drainage Cannula 31Fr").hidden = !checkbox.checked;
     break;
 ```
+7. Run the updated code in your web-browser
 
 #### Versions
 * 1.0 (barely) managed to graph the curves
