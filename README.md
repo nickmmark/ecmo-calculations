@@ -171,3 +171,7 @@ This code is provided "as is", without warranty of any kind. Don't be stupid. Do
 * Spectrum Medical --> [Quantum Dual Lumen Jugular Catheter](https://www.spectrummedical.com/en-us/quantum-perfusion-technologies/quantum-sterile-technologies-us/cannulas-us/dual-lumen-rv-to-pa-cannula)
 * Getinge --> [Avalon Elite Bi-Caval Dual Lumen Catheter](https://www.getinge.com/int/products/avalon-elite-catheter/?tab=2)
 * LivaNova --> [ProTek Duo Dual Lumen Catheter](https://www.livanova.com/advanced-circulatory-support/en-us/protekduo-kit)
+
+#### Re-circulation
+Abrams, D. Brodie, D. Identification and management of recirculation in venovenous ECMO. _ELSO Guidelines_ 2015
+Xie A, Yan TD, Forrest P. **[Recirculation in venovenous extracorporeal membrane oxygenation.](10.1016/j.jcrc.2016.05.027)** _J Crit Care._ 2016
