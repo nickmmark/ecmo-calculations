@@ -122,7 +122,8 @@ Recirculation can be caused by several factors:
 Additionally, the absolute saturations can convey additional information; A SpreO2 <75% suggests that significant recirculation is unlikely.
 
 #### Implementation
-
+A simple web app for calculating re-circulation (%). It also provides some messages to help the user interpret/troubleshoot the results.
+![](https://github.com/nickmmark/ecmo-calculations/blob/main/ECMO_Recirculation_demo1.gif)
 
 
 ## Membrane lung efficiency
