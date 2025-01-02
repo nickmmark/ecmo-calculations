@@ -104,3 +104,4 @@ This code is provided "as is", without warranty of any kind. Don't be stupid. Do
 * Medtronic --> [Crescent Dual Lumen Jugular Catheter](https://europe.medtronic.com/xd-en/healthcare-professionals/products/cardiovascular/extracorporeal-life-support/crescent-jugular-dual-lumen-catheter.html)
 * Spectrum Medical --> [Quantum Dual Lumen Jugular Catheter](https://www.spectrummedical.com/en-us/quantum-perfusion-technologies/quantum-sterile-technologies-us/cannulas-us/dual-lumen-rv-to-pa-cannula)
 * Getinge --> [Avalon Elite Bi-Caval Dual Lumen Catheter](https://www.getinge.com/int/products/avalon-elite-catheter/?tab=2)
+* LivaNova --> [ProTek Duo Dual Lumen Catheter](https://www.livanova.com/advanced-circulatory-support/en-us/protekduo-kit)
