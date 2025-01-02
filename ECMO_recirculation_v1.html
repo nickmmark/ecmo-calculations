@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VV-ECMO Recirculation Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #FF0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #cc0000;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9f7df;
+            border: 1px solid #a8d08d;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>VV-ECMO Recirculation Calculator</h2>
+        <p>This calculator determines the percentage of recirculation during VV-ECMO using oxygen saturation values.</p>
+
+        <label for="spreO2">Saturation of blood entering the oxygenator (SpreO2) (%):</label>
+        <input type="number" id="spreO2" placeholder="Enter SpreO2" step="1">
+
+        <label for="spostO2">Saturation of blood leaving the oxygenator (SpostO2) (%):</label>
+        <input type="number" id="spostO2" placeholder="Enter SpostO2" step="1">
+
+        <label for="svO2">Saturation of blood in the pulmonary artery (SvO2) (%):</label>
+        <input type="number" id="svO2" placeholder="Enter SvO2" step="1">
+
+        <button onclick="calculateRecirculation()">Calculate Recirculation (%)</button>
+
+        <div id="result" class="result" style="display: none;"></div>
+    </div>
+
+    <script>
+        function calculateRecirculation() {
+            const spreO2 = parseFloat(document.getElementById('spreO2').value);
+            const spostO2 = parseFloat(document.getElementById('spostO2').value);
+            const svO2 = parseFloat(document.getElementById('svO2').value);
+
+            if (isNaN(spreO2) || isNaN(spostO2) || isNaN(svO2)) {
+                alert('Please enter valid numbers for all fields.');
+                return;
+            }
+
+            if (spostO2 === svO2) {
+                alert('SpostO2 and SvO2 cannot be equal to avoid division by zero.');
+                return;
+            }
+
+            const recirculation = ((spreO2 - svO2) / (spostO2 - svO2)) * 100;
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `<div style='font-size: 24px; font-weight: bold;'>Recirculation: ${recirculation.toFixed(1)}%</div>`;
+
+            let additionalMessages = '';
+
+            if (recirculation > 20) {
+                additionalMessages += '<p>Recirculation >20% is likely clinically significant.</p>';
+            }
+            if (spreO2 < 75) {
+                additionalMessages += '<p>A Pre-oxygenator saturation <75% suggests that significant recirculation is unlikely.</p>';
+            }
+            if (spostO2 < spreO2) {
+                additionalMessages += '<p>The Post-oxygenator saturation (SpostO2) should be greater than the pre-oxygenator saturation. Double check your measurements.</p>';
+            }
+            if (spreO2 < svO2) {
+                additionalMessages += '<p>The Pre-oxygenator saturation (SpreO2) should be greater than the mixed venous saturation (SvO2). Double check your measurements.</p>';
+            }
+
+            if (additionalMessages) {
+                resultDiv.innerHTML += additionalMessages;
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
