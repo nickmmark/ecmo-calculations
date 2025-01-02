@@ -51,7 +51,7 @@ All the flow curves were obtained from the manufacturer. See below for reference
       <label><input type="checkbox" id="ProTek31Fr"> 31 Fr <span class="flow-result" id="flow-ProTek31Fr"></span></label>
   </div>
 ```
-4. Update the equations and flow coefficients using the equation. e.g.
+4. Update the equations and flow coefficients. e.g.
 ```javascript
   // equations
     "ProTek29FrDrain": (x) => -2.4682 * x ** 2 - 2.1438 * x;
@@ -64,10 +64,10 @@ All the flow curves were obtained from the manufacturer. See below for reference
 ```javascript
 const label = key.includes('Quantum') ? `Quantum ${type} Cannula ${size}` :
               key.includes('Avalon') ? `Avalon ${type} Cannula ${size}` :
-              key.includes('ProTek') ? `ProTek Duo ${type} Cannula ${size}` : // NEW cannula added
+              key.includes('ProTek') ? `ProTek Duo ${type} Cannula ${size}` : // NEW cannula added HERE
               `Crescent ${type} Cannula ${size}`;
 ```
-6. Add logic to the checkbox event handler, so the cannula appear/disappear when boxes are checked. e.g.
+6. Add logic to the checkbox event handler, so the cannula appear/disappear when boxes are checked. (Note that for single lumen cannula there would only be one cannula per checkbox event). e.g.
 ``` javascript
 case "ProTek29Fr":
     chart.data.datasets.find(dataset => dataset.label === "ProTek Duo Inflow Cannula 29Fr").hidden = !checkbox.checked;
