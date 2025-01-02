@@ -173,5 +173,8 @@ This code is provided "as is", without warranty of any kind. Don't be stupid. Do
 * LivaNova --> [ProTek Duo Dual Lumen Catheter](https://www.livanova.com/advanced-circulatory-support/en-us/protekduo-kit)
 
 #### Re-circulation
-Abrams, D. Brodie, D. Identification and management of recirculation in venovenous ECMO. _ELSO Guidelines_ 2015
-Xie A, Yan TD, Forrest P. **[Recirculation in venovenous extracorporeal membrane oxygenation.](10.1016/j.jcrc.2016.05.027)** _J Crit Care._ 2016
+* Abrams, D. Brodie, D. Identification and management of recirculation in venovenous ECMO. _ELSO Guidelines_ 2015
+* Xie A, Yan TD, Forrest P. **[Recirculation in venovenous extracorporeal membrane oxygenation.](10.1016/j.jcrc.2016.05.027)** _J Crit Care._ 2016
+
+#### Membrane Lung Efficiency
+
