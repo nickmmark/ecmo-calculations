@@ -15,11 +15,13 @@ While **Hagen-Pousille** provides a good _first approximation_ of flow, there ar
 * **Cannula geometry is complex** - mutiple stages with multiple holes complicates flow dynamics
 * At very high flow rates, additional phenomena like compressibility and cavitation may contribute
 
-Thus instead of using Hagen-Pousille, it is more accurate to ***empirically measure the performance of each cannula***. Each manufacturer provides the measured flow/pressure curves for each cannula. As a clinician it is necessary to consult the different cannula pressure/flow curves to determine the expected pressure drop and flow acheivable with a given ECMO configuration. Unfortunately this requires finding & consulting many different PDFs to find the necessary information, especially if comparing multiple possible cannula configurations.
+Thus instead of using Hagen-Pousille, it is more accurate to ***empirically measure the performance of each cannula***. Each manufacturer provides the measured flow/pressure nomogram curves for each cannula. As a clinician it is necessary to consult the different cannula pressure/flow curves to determine the expected pressure drop and flow acheivable with a given ECMO configuration. Unfortunately this requires finding & consulting many different PDFs to find the necessary information, especially if comparing multiple possible cannula configurations.
 
 I made a simple web app that combines all the data together, making it easier to compare different cannula and determine the expected flows/pressure drops:
 
 ![](https://github.com/nickmmark/ecmo-calculations/blob/main/ECMO_cannula_calculator_v1_demo.gif)
+
+The "maximum pressure drop" across a venous cannula in ECMO refers to the greatest difference in pressure between the blood entering the cannula from the patient's vein and the blood exiting the cannula into the ECMO circuit. Typically a value of 100 or 150 mmHg is considered the maximum pressure drop. The app allows the user to specify the maximum permissible pressure drop and it both calculates it for each cannula and displays it visually on the graph.
 
 
 #### Process
