@@ -34,7 +34,7 @@ All the flow curves were obtained from the manufacturer. See below for reference
 
 #### Guide for adding more cannula to the app
 1. Abstract the curves using [WebPlotDigitizer](https://apps.automeris.io/wpd4/); align the axes & add at least 5 points for each line.
-2. Paste the data into excel & create a `second order polynomial` trendline. Set the intercept = 0.0. Ensure the $R^{2}$ > 0.99 for quality. Copy the polynomial.
+2. Paste the data into excel & create a `second order polynomial` trendline. Set the intercept = 0.0. Ensure the $R^{2}$ > 0.99 for quality. Copy the polynomial. For example, here is data for the ProTek Duo cannula:
 
 | Cannula | Polynomial | R2 |
 |---|---|---|
@@ -43,7 +43,7 @@ All the flow curves were obtained from the manufacturer. See below for reference
 | ProTek Duo 31Fr inflow | y = 6.9807x2 + 1.9931x | 0.9999 |
 | ProTek Duo 31Fr drainage | y = -1.8139x2 - 4.5159x | 0.9997 |  
 
-3. Add a new group of checkboxes for the new cannula. For example:
+3. Add a new group of checkboxes for the new cannula. e.g.
 ```html
   <div class="group protek-group">
       <label><input type="checkbox" id="ProTek"><b> ProTek Duo Cannula</b></label>
