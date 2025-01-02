@@ -27,11 +27,46 @@ I used the published flow/pressure curves for each cannula, abstracting the data
 
 ![Data abstraction process](https://github.com/nickmmark/ecmo-calculations/blob/main/ECMO_cannula_flow.png)
 
+#### Guide for adding more cannula to the app
+1. Abstract the curves using WebPlotDigitizer; align the axes & add at least 5 points for each line.
+2. Paste the data into excel & create a `second order polynomial` trendline. Set the intercept = 0.0 
+3. Add a new group of checkboxes; for example:
+```html
+  <div class="group protek-group">
+      <label><input type="checkbox" id="ProTek"><b> ProTek Duo Cannula</b></label>
+      <label><input type="checkbox" id="ProTek29Fr"> 29 Fr <span class="flow-result" id="flow-ProTek29Fr"></span></label>
+      <label><input type="checkbox" id="ProTek31Fr"> 31 Fr <span class="flow-result" id="flow-ProTek31Fr"></span></label>
+  </div>
+```
+5. Update the equations and flow coefficients, for example
+```javascript
+    "ProTek29FrDrain": (x) => -2.4682 * x ** 2 - 2.1438 * x;
+    "ProTek31FrDrain": (x) => -1.8139 * x ** 2 - 4.5159 * x;
+```
+5. Update the dataset generation logic; for example:
+```javascript
+const label = key.includes('Quantum') ? `Quantum ${type} Cannula ${size}` :
+              key.includes('Avalon') ? `Avalon ${type} Cannula ${size}` :
+              key.includes('ProTek') ? `ProTek Duo ${type} Cannula ${size}` : // NEW cannula added
+              `Crescent ${type} Cannula ${size}`;
+```
+7. Add logic to the checkbox event handler
+``` javascript
+case "ProTek29Fr":
+    chart.data.datasets.find(dataset => dataset.label === "ProTek Duo Inflow Cannula 29Fr").hidden = !checkbox.checked;
+    chart.data.datasets.find(dataset => dataset.label === "ProTek Duo Drainage Cannula 29Fr").hidden = !checkbox.checked;
+    break;
+case "ProTek31Fr":
+    chart.data.datasets.find(dataset => dataset.label === "ProTek Duo Inflow Cannula 31Fr").hidden = !checkbox.checked;
+    chart.data.datasets.find(dataset => dataset.label === "ProTek Duo Drainage Cannula 31Fr").hidden = !checkbox.checked;
+    break;
+```
 
 #### Versions
 * 1.0 managed to graph the curves
 * 2.0 improved graphs with groups
 * 3.0 improved graphs with max flow calculated for a given maximum pressure drop
+* 4.0 added additional cannula, improved UX, added hyperlinks to manufacturer reference sheet for transparency
 
 
 #### Things to do
