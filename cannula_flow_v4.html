@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECMO Flow Calculator</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        canvas {
+            width: 100%;
+            height: auto;
+        }
+        .controls {
+            margin-bottom: 20px;
+            font-size: 10px; /* Reduced text size */
+        }
+        .group {
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin-bottom: 5px;
+        }
+        .group label {
+            display: block;
+        }
+        .group b {
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .group b a {
+            font-size: 10px;
+            text-decoration: none;
+            color: blue;
+        }
+        .flow-result {
+            font-weight: italic;
+            color: red;
+        }
+        details {
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+        summary {
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>ECMO Cannula Flow Calculator</h1>
+    <div class="controls">
+        <details open>
+        <summary><b>Dual Lumen IJ Cannula</b></b></summary> 
+        <div class="group crescent-group">
+            <label>
+                <input type="checkbox" id="Crescent">
+                <b> Crescent Cannula <a href="https://europe.medtronic.com/xd-en/healthcare-professionals/products/cardiovascular/extracorporeal-life-support/crescent-jugular-dual-lumen-catheter.html" target="_blank">&#x1F517;</a></b>
+            </label>
+            <label><input type="checkbox" id="24Fr"> 24 Fr <span class="flow-result" id="flow-24Fr"></span></label>
+            <label><input type="checkbox" id="26Fr"> 26 Fr <span class="flow-result" id="flow-26Fr"></span></label>
+            <label><input type="checkbox" id="28Fr"> 28 Fr <span class="flow-result" id="flow-28Fr"></span></label>
+            <label><input type="checkbox" id="30Fr"> 30 Fr <span class="flow-result" id="flow-30Fr"></span></label>
+            <label><input type="checkbox" id="32Fr"> 32 Fr <span class="flow-result" id="flow-32Fr"></span></label>
+        </div>
+        <div class="group">
+            <label>
+                <input type="checkbox" id="Quantum">
+                <b> Quantum Cannula <a href="https://www.spectrummedical.com/en-us/quantum-perfusion-technologies/quantum-sterile-technologies-us/cannulas-us/dual-lumen-rv-to-pa-cannula" target="_blank">&#x1F517;</a></b>
+            </label>
+            <label><input type="checkbox" id="Quantum24Fr"> 24 Fr <span class="flow-result" id="flow-Quantum24Fr"></span></label>
+            <label><input type="checkbox" id="Quantum27Fr"> 27 Fr <span class="flow-result" id="flow-Quantum27Fr"></span></label>
+            <label><input type="checkbox" id="Quantum31Fr"> 31 Fr <span class="flow-result" id="flow-Quantum31Fr"></span></label>
+        </div>
+        <div class="group">
+            <label>
+                <input type="checkbox" id="Avalon">
+                <b> Avalon Cannula <a href="https://www.getinge.com/int/products/avalon-elite-catheter/?tab=2" target="_blank">&#x1F517;</a></b>
+            </label>
+            <label><input type="checkbox" id="Avalon20Fr"> 20 Fr <span class="flow-result" id="flow-Avalon20Fr"></span></label>
+            <label><input type="checkbox" id="Avalon23Fr"> 23 Fr <span class="flow-result" id="flow-Avalon23Fr"></span></label>
+            <label><input type="checkbox" id="Avalon27Fr"> 27 Fr <span class="flow-result" id="flow-Avalon27Fr"></span></label>
+            <label><input type="checkbox" id="Avalon31Fr"> 31 Fr <span class="flow-result" id="flow-Avalon31Fr"></span></label>
+        </div>
+        <div class="group protek-group">
+            <label>
+                <input type="checkbox" id="ProTek">
+                <b> ProTek Duo Cannula <a href="https://www.example.com/protek" target="_blank">&#x1F517;</a></b>
+            </label>
+            <label><input type="checkbox" id="ProTek29Fr"> 29 Fr <span class="flow-result" id="flow-ProTek29Fr"></span></label>
+            <label><input type="checkbox" id="ProTek31Fr"> 31 Fr <span class="flow-result" id="flow-ProTek31Fr"></span></label>
+        </div>
+        </details>
+        <br>
+        <label style="color: red;"><input type="checkbox" id="maxPressureLine"><b> Show Maximum Pressure Drop</b></label>
+        <input type="number" id="maxPressureValue" value="150" step="10">
+        <label for="maxPressureValue"> (mmHg):</label>
+    </div>
+    <canvas id="flowChart"></canvas>
+
+    <script>
+        // Cannula equations
+        const equations = {
+            "24Fr": (x) => 18.65 * x ** 2 + 6.7335 * x,
+            "26Fr": (x) => 11.215 * x ** 2 + 6.0422 * x,
+            "28Fr": (x) => 7.9396 * x ** 2 + 5.5664 * x,
+            "30Fr": (x) => 5.6205 * x ** 2 + 3.5476 * x,
+            "32Fr": (x) => 4.3856 * x ** 2 + 1.5097 * x,
+            "24FrDrain": (x) => -4.0878 * x ** 2 - 4.4519 * x,
+            "26FrDrain": (x) => -2.6488 * x ** 2 - 3.7688 * x,
+            "28FrDrain": (x) => -1.9888 * x ** 2 - 2.4497 * x,
+            "30FrDrain": (x) => -1.058 * x ** 2 - 4.1433 * x,
+            "32FrDrain": (x) => -1.4009 * x ** 2 - 0.4532 * x,
+            "Quantum24Fr": (x) => 26.82 * x ** 2 + 27.243 * x,
+            "Quantum27Fr": (x) => 13.568 * x ** 2 + 12.411 * x,
+            "Quantum31Fr": (x) => 7.6486 * x ** 2 + 5.1713 * x,
+            "Quantum24FrDrain": (x) => -4.6793 * x ** 2 - 12.719 * x,
+            "Quantum27FrDrain": (x) => -3.4414 * x ** 2 - 7.1491 * x,
+            "Quantum31FrDrain": (x) => -1.954 * x ** 2 - 2.7028 * x,
+            "Avalon20Fr": (x) => 68.756 * x ** 2 + 2.2718 * x,
+            "Avalon23Fr": (x) => 27.066 * x ** 2 + 1.7003 * x,
+            "Avalon27Fr": (x) => 10.984 * x ** 2 + 5.3044 * x,
+            "Avalon31Fr": (x) => 6.3107 * x ** 2 + 0.8747 * x,
+            "Avalon20FrDrain": (x) => -17.187 * x ** 2 - 11.117 * x,
+            "Avalon23FrDrain": (x) => -7.7468 * x ** 2 - 8.4351 * x,
+            "Avalon27FrDrain": (x) => -3.4861 * x ** 2 - 2.3871 * x,
+            "Avalon31FrDrain": (x) => -2.0684 * x ** 2 + 0.6194 * x,
+            "ProTek29Fr": (x) => 14.909 * x ** 2 + 1.7309 * x,
+            "ProTek31Fr": (x) => 6.9807 * x ** 2 + 1.9931 * x,
+            "ProTek29FrDrain": (x) => -2.4682 * x ** 2 - 2.1438 * x,
+            "ProTek31FrDrain": (x) => -1.8139 * x ** 2 - 4.5159 * x
+        };
+
+        // Coefficients for each equation
+        const coefficients = {
+            "24Fr": { a: 18.65, b: 6.7335 },
+            "26Fr": { a: 11.215, b: 6.0422 },
+            "28Fr": { a: 7.9396, b: 5.5664 },
+            "30Fr": { a: 5.6205, b: 3.5476 },
+            "32Fr": { a: 4.3856, b: 1.5097 },
+            "Quantum24Fr": { a: 26.82, b: 27.243 },
+            "Quantum27Fr": { a: 13.568, b: 12.411 },
+            "Quantum31Fr": { a: 7.6486, b: 5.1713 },
+            "Avalon20Fr": { a: 68.756, b: 2.2718 },
+            "Avalon23Fr": { a: 27.066, b: 1.7003 },
+            "Avalon27Fr": { a: 10.984, b: 5.3044 },
+            "Avalon31Fr": { a: 6.3107, b: 0.8747 },
+            "ProTek29Fr": { a: 14.909, b: 1.7309 },
+            "ProTek31Fr": { a: 6.9807, b: 1.9931 }
+        };
+
+        // Solve quadratic equation for flow at given pressure drop
+        function calculateFlow(a, b, pressure) {
+            const discriminant = b ** 2 - 4 * a * -pressure;
+            if (discriminant < 0) return null; // No real solution
+            const flow1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+            const flow2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+            return Math.max(flow1, flow2); // Return the positive solution
+        }
+
+        // Update flow values when max pressure is set
+        function updateFlowValues() {
+            const maxPressure = parseFloat(document.getElementById('maxPressureValue').value);
+            Object.keys(coefficients).forEach(key => {
+                if (!key.includes('Drain')) { // Only process inflow cannulas
+                    const { a, b } = coefficients[key];
+                    const flow = calculateFlow(a, b, maxPressure);
+                    const flowElement = document.getElementById(`flow-${key}`);
+                    if (flowElement) {
+                        flowElement.innerText = flow ? `${flow.toFixed(2)} lpm` : "N/A";
+                    }
+                }
+            });
+        }
+
+        // Generate data points for a given equation
+        function generateData(equation) {
+            const data = [];
+            for (let x = 0; x <= 7; x += 0.1) { // Flow range from 0 to 7 L/min
+                data.push({ x: x, y: equation(x) });
+            }
+            return data;
+        }
+
+        // Create the chart
+        const ctx = document.getElementById('flowChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'scatter',
+            data: {
+                datasets: []
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                let xValue = context.raw.x.toFixed(1) + ' lpm';
+                                let yValue = Math.round(context.raw.y) + ' mmHg';
+                                return `${label}: Flow: ${xValue}, Pressure: ${yValue}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom',
+                        title: {
+                            display: true,
+                            text: 'Flow (L/min)'
+                        }
+                    },
+                    y: {
+                        min: -150,
+                        max: 300,
+                        ticks: {
+                            stepSize: 50
+                        },
+                        title: {
+                            display: true,
+                            text: 'Pressure Drop (mmHg)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Add datasets for all cannulas
+        Object.keys(equations).forEach(key => {
+            const isDrainage = key.includes('Drain');
+            const type = isDrainage ? 'Drainage' : 'Inflow';
+            const size = key.match(/[0-9]+Fr/)[0];
+            const label = key.includes('Quantum') ? `Quantum ${type} Cannula ${size}` :
+                key.includes('Avalon') ? `Avalon ${type} Cannula ${size}` :
+                key.includes('ProTek') ? `ProTek Duo ${type} Cannula ${size}` :
+                `Crescent ${type} Cannula ${size}`;
+            const color = isDrainage ? `rgba(0, 0, 150, 1)` : `rgba(150, 0, 0, 1)`;
+            chart.data.datasets.push({
+                label: label,
+                data: generateData(equations[key]),
+                borderColor: color,
+                backgroundColor: color.replace('1)', '0.2)'),
+                showLine: true,
+                pointRadius: 1,
+                hidden: true //make the cannula hidden upon loading
+            });
+        });
+
+        chart.update();
+
+        // Update chart based on checkbox selection
+        const checkboxes = document.querySelectorAll('.controls input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                switch (checkbox.id) {
+                    case "Crescent":
+                      document.querySelectorAll('.crescent-group input[type="checkbox"]').forEach(childCheckbox => {
+                      if (childCheckbox.id !== "Crescent") {
+                        childCheckbox.checked = checkbox.checked;
+                        childCheckbox.dispatchEvent(new Event('change'));
+                      }
+                    });
+                    break;
+                    case "Quantum":
+                        document.querySelectorAll('#Quantum24Fr, #Quantum27Fr, #Quantum31Fr').forEach(childCheckbox => {
+                            childCheckbox.checked = checkbox.checked;
+                            childCheckbox.dispatchEvent(new Event('change'));
+                        });
+                        break;
+                    case "Avalon":
+                        document.querySelectorAll('#Avalon20Fr, #Avalon23Fr, #Avalon27Fr, #Avalon31Fr').forEach(childCheckbox => {
+                            childCheckbox.checked = checkbox.checked;
+                            childCheckbox.dispatchEvent(new Event('change'));
+                        });
+                        break;
+                    case "ProTek":
+                        document.querySelectorAll('#ProTek29Fr, #ProTek31Fr').forEach(childCheckbox => {
+                            childCheckbox.checked = checkbox.checked;
+                            childCheckbox.dispatchEvent(new Event("change"));
+                        });
+                        break;
+                    case "24Fr":
+                        chart.data.datasets.find(dataset => dataset.label === "Crescent Inflow Cannula 24Fr").hidden = !checkbox.checked;
+                        chart.data.datasets.find(dataset => dataset.label === "Crescent Drainage Cannula 24Fr").hidden = !checkbox.checked;
+                        break;
+                    case "26Fr":
+                        chart.data.datasets.find(dataset => dataset.label === "Crescent Inflow Cannula 26Fr").hidden = !checkbox.checked;
+                        chart.data.datasets.find(dataset => dataset.label === "Crescent Drainage Cannula 26Fr").hidden = !checkbox.checked;
+                        break;
+                    case "28Fr":
+                        chart.data.datasets.find(dataset => dataset.label === "Crescent Inflow Cannula 28Fr").hidden = !checkbox.checked;
+                        chart.data.datasets.find(dataset => dataset.label === "Crescent Drainage Cannula 28Fr").hidden = !checkbox.checked;
+                        break;
+                    case "30Fr":
+                        chart.data.datasets.find(dataset => dataset.label === "Crescent Inflow Cannula 30Fr").hidden = !checkbox.checked;
+                        chart.data.datasets.find(dataset => dataset.label === "Crescent Drainage Cannula 30Fr").hidden = !checkbox.checked;
+                        break;
+                    case "32Fr":
+                        chart.data.datasets.find(dataset => dataset.label === "Crescent Inflow Cannula 32Fr").hidden = !checkbox.checked;
+                        chart.data.datasets.find(dataset => dataset.label === "Crescent Drainage Cannula 32Fr").hidden = !checkbox.checked;
+                        break;
+                    case "Quantum24Fr":
+                        chart.data.datasets.find(dataset => dataset.label === "Quantum Inflow Cannula 24Fr").hidden = !checkbox.checked;
+                        chart.data.datasets.find(dataset => dataset.label === "Quantum Drainage Cannula 24Fr").hidden = !checkbox.checked;
+                        break;
+                    case "Quantum27Fr":
+                        chart.data.datasets.find(dataset => dataset.label === "Quantum Inflow Cannula 27Fr").hidden = !checkbox.checked;
+                        chart.data.datasets.find(dataset => dataset.label === "Quantum Drainage Cannula 27Fr").hidden = !checkbox.checked;
+                        break;
+                    case "Quantum31Fr":
+                        chart.data.datasets.find(dataset => dataset.label === "Quantum Inflow Cannula 31Fr").hidden = !checkbox.checked;
+                        chart.data.datasets.find(dataset => dataset.label === "Quantum Drainage Cannula 31Fr").hidden = !checkbox.checked;
+                        break;
+                    case "Avalon20Fr":
+                        chart.data.datasets.find(dataset => dataset.label === "Avalon Inflow Cannula 20Fr").hidden = !checkbox.checked;
+                        chart.data.datasets.find(dataset => dataset.label === "Avalon Drainage Cannula 20Fr").hidden = !checkbox.checked;
+                        break;
+                    case "Avalon23Fr":
+                        chart.data.datasets.find(dataset => dataset.label === "Avalon Inflow Cannula 23Fr").hidden = !checkbox.checked;
+                        chart.data.datasets.find(dataset => dataset.label === "Avalon Drainage Cannula 23Fr").hidden = !checkbox.checked;
+                        break;
+                    case "Avalon27Fr":
+                        chart.data.datasets.find(dataset => dataset.label === "Avalon Inflow Cannula 27Fr").hidden = !checkbox.checked;
+                        chart.data.datasets.find(dataset => dataset.label === "Avalon Drainage Cannula 27Fr").hidden = !checkbox.checked;
+                        break;
+                    case "Avalon31Fr":
+                        chart.data.datasets.find(dataset => dataset.label === "Avalon Inflow Cannula 31Fr").hidden = !checkbox.checked;
+                        chart.data.datasets.find(dataset => dataset.label === "Avalon Drainage Cannula 31Fr").hidden = !checkbox.checked;
+                        break;
+                    case "ProTek29Fr":
+                        chart.data.datasets.find(dataset => dataset.label === "ProTek Duo Inflow Cannula 29Fr").hidden = !checkbox.checked;
+                        chart.data.datasets.find(dataset => dataset.label === "ProTek Duo Drainage Cannula 29Fr").hidden = !checkbox.checked;
+                        break;
+                    case "ProTek31Fr":
+                        chart.data.datasets.find(dataset => dataset.label === "ProTek Duo Inflow Cannula 31Fr").hidden = !checkbox.checked;
+                        chart.data.datasets.find(dataset => dataset.label === "ProTek Duo Drainage Cannula 31Fr").hidden = !checkbox.checked;
+                        break;
+                    case "maxPressureLine":
+                        const lineDataset = chart.data.datasets.find(dataset => dataset.label === "Maximum Pressure Drop");
+                        if (lineDataset) lineDataset.hidden = !checkbox.checked;
+                        break;
+                }
+                chart.update();
+            });
+        });
+
+        // Add maximum pressure line
+        chart.data.datasets.push({
+            label: 'Maximum Pressure Drop',
+            data: [{ x: 0, y: 150 }, { x: 7, y: 150 }],
+            borderColor: 'rgba(0, 0, 0, 1)',
+            borderWidth: 1,
+            borderDash: [10, 5],
+            fill: false,
+            showLine: true,
+            pointRadius: 0,
+            hidden: false
+        });
+
+        // Update maximum pressure line position
+        document.getElementById('maxPressureValue').addEventListener('input', (event) => {
+            const value = parseFloat(event.target.value);
+            const lineDataset = chart.data.datasets.find(dataset => dataset.label === 'Maximum Pressure Drop');
+            if (lineDataset) {
+                lineDataset.data = [{ x: 0, y: value }, { x: 7, y: value }];
+                chart.update();
+            }
+            updateFlowValues();
+        });
+
+        document.getElementById('maxPressureLine').addEventListener('change', (event) => {
+            const lineDataset = chart.data.datasets.find(dataset => dataset.label === 'Maximum Pressure Drop');
+            if (lineDataset) {
+                lineDataset.hidden = !event.target.checked;
+                chart.update();
+            }
+            updateFlowValues();
+        });
+
+        // Initial update for flow values
+        updateFlowValues();
+    </script>
+</body>
+</html>
