@@ -129,11 +129,11 @@ A simple web app for calculating re-circulation (%). It also provides some messa
 ## Membrane lung efficiency
 **Membrane Lung Efficiency** is a quantitative measure of how well the ECMO membrane lung transfers oxygen (and carbon dioxide) between blood and gas. Changes in membrane lung efficiency can indicate potential issues such as thrombosis or circuit malfunction.
 ```math
-VO2ML = BF \cdot ({C}_{post}O2 - {C}_{post}O2) \cdot 10
+VO2ML = BFR \cdot ({C}_{post}O2 - {C}_{pre}O2) \cdot 10
 ```
 where:
 * VO2ML - the oxygen transfer for the membrane lung (mL/min)
-* BF - blood flow through the membrane lung (L/min)
+* BFR - blood flow through the membrane lung (L/min)
 * CpreO2 - oxygen content in blood entering the membrane lung (mL/dL)
 * CpostO2 - oxygen content in blood leaving the membrane lung (mL/dL)
 
@@ -144,6 +144,12 @@ where:
 * Hb - hemoglobin concentration (g/dL)
 * SxO2 - the oxygen saturation (%) of the blood
 * PxO2 - partial pressure of oxygen in the blood
+
+We can ignore the small amount of dissolved oxygen, and re-write the equation as:
+```math
+VO2ML = BFR \cdot Hb \cdot ({S}_{post}O2 - {S}_{pre}O2) \cdot 10
+```
+
 
 ## DO2 and VO2
 
