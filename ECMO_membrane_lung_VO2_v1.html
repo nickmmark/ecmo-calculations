@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membrane Lung Oxygen Transfer Rate (VO2ML) Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #FF0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #cc0000;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9f7df;
+            border: 1px solid #a8d08d;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Membrane Lung Oxygen Transfer Rate (VO2ML) Calculator</h2>
+        <p>This calculator determines the oxygen transfer rate through the membrane lung using blood flow rate, hemoglobin concentration, and oxygen saturations.</p>
+
+        <label for="bfr">Blood Flow Rate (BFR) through the membrane lung (L/min):</label>
+        <input type="number" id="bfr" placeholder="Enter BFR" step="0.1">
+
+        <label for="hb">Hemoglobin concentration (Hb) (g/dL):</label>
+        <input type="number" id="hb" placeholder="Enter Hb" step="0.5">
+
+        <label for="spostO2">Saturation of blood leaving the oxygenator (SpostO2) (%):</label>
+        <input type="number" id="spostO2" placeholder="Enter SpostO2" step="1">
+
+        <label for="spreO2">Saturation of blood entering the oxygenator (SpreO2) (%):</label>
+        <input type="number" id="spreO2" placeholder="Enter SpreO2" step="1">
+
+        <button onclick="calculateVO2ML()">Calculate VO2ML (ml/min)</button>
+
+        <div id="result" class="result" style="display: none;"></div>
+    </div>
+
+    <script>
+        function calculateVO2ML() {
+            const bfr = parseFloat(document.getElementById('bfr').value);
+            const hb = parseFloat(document.getElementById('hb').value);
+            const spostO2 = parseFloat(document.getElementById('spostO2').value);
+            const spreO2 = parseFloat(document.getElementById('spreO2').value);
+
+            if (isNaN(bfr) || isNaN(hb) || isNaN(spostO2) || isNaN(spreO2)) {
+                alert('Please enter valid numbers for all fields.');
+                return;
+            }
+
+            const vo2ml = bfr * hb * (spostO2 - spreO2);
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `<div style='font-size: 24px; font-weight: bold;'>VO2ML: ${vo2ml.toFixed(2)} ml/min</div>`;
+        }
+    </script>
+</body>
+</html>
+
