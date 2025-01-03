@@ -90,7 +90,7 @@ case "ProTek31Fr":
 #### Things to do
 [x] add a "maximum predicted flow" for each cannula given the maximum pressure drop
 
-[] add more cannula! (this probably means having a seperate database that the visualization app can access... ugh complex)
+[] add more cannula! (this probably means having a seperate database that the visualization app can access... ugh complex redesign)
 
 [] add schematics for each cannula showing details such as stages, number of inlets, and cross section (a.k.a. pretty drawings!)
 
