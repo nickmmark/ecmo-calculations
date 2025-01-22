@@ -99,6 +99,9 @@ case "ProTek31Fr":
 [] allow the user to specify combinations of different cannula (e.g. VAV, VAPa, etc); this will require adding flow together cannula in parallel. Some interesting math and physics to think about. Kirchoff's laws?
 
 
+#### Vision
+Eventually this could be more than a tool to calucualte flows/pressure drops. By adding the `membrane lung` and `pump` to the model, we could also estimate other parameters like membrane lung efficiency, VO2, etc. This could be like a **"Digital Twin" of the ECMO patient** and would be useful for anticipating and optimizing settings.
+
 
 ## Re-circualtion Calculator
 **Recirculation** is a common issue with venovenous ECMO that occurs when oxygenated blood is withdrawn by the drainage cannula, instead of entering the patient's systemic circulation.
