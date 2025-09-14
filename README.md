@@ -17,7 +17,7 @@ While **Hagen-Pousille** provides a good _first approximation_ of flow, there ar
 
 Thus instead of using Hagen-Pousille, it is more accurate to ***empirically measure the performance of each cannula***. Each manufacturer provides the measured flow/pressure nomogram curves for each cannula. As a clinician it is necessary to consult the different cannula pressure/flow curves to determine the expected pressure drop and flow acheivable with a given ECMO configuration. Unfortunately this requires finding & consulting many different PDFs to find the necessary information, especially if comparing multiple possible cannula configurations.
 
-I made a simple web app that combines all the data together, making it easier to compare different cannula and determine the expected flows/pressure drops:
+I made a [simple web app](https://nickmmark.github.io/ecmo-calculations/) that combines all the data together, making it easier to compare different cannula and determine the expected flows/pressure drops:
 
 ![](https://github.com/nickmmark/ecmo-calculations/blob/main/ECMO_cannula_calculator_v1_demo.gif)
 
